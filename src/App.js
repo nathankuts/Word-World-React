@@ -8,6 +8,7 @@ import SignInForm from './components/SignInForm';
 import Teasers from './components/Teasers';
 import Footer from './components/Footer';
 import PublishedChapter from './components/PublishedChapter/PublishedChapter';
+import PublishForm from './components/PublishForm';
 
 function App() {
     return (
@@ -28,6 +29,9 @@ function App() {
                     </Route>
                     <Route path="/chapter">
                         <PublishedChapter />
+                    </Route>
+                    <Route path="/publish">
+                        <PublishForm />
                     </Route>
                 </Switch>
                 <Footer />
