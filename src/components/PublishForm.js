@@ -13,7 +13,7 @@ const PublishForm = () => {
 
     postPublishedChapter(title, content).then(response => {
       if (response.status === 200) {
-        window.location.href = `published-chapter.html?id=${response.chapter.id}`;
+        window.location.href = `/published-chapter?id=${response.chapter.id}`;
       } else {
         alert('Failed to save chapter');
       }
@@ -25,7 +25,14 @@ const PublishForm = () => {
       <form id="publishForm" className="center-form" onSubmit={handleSubmit}>
         <h2>Publish A Chapter</h2>
         <label htmlFor="title">Title</label>
-        <input type="text" id="title" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
         
         <label htmlFor="content">Content</label>
         <div
