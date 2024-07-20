@@ -1,56 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import './PublishedChapter.css';
+import { getComic } from './mockApi';
+import './chapter.css';
 
 const PublishedChapter = () => {
-  const [chapter, setChapter] = useState({ title: '', content: '' });
-  const [error, setError] = useState(false);
+    const [comic, setComic] = useState(null);
+    const [error, setError] = useState(false);
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const chapterId = parseInt(urlParams.get('id'));
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const comicId = parseInt(urlParams.get('id'));
 
-    if (isNaN(chapterId)) {
-      setError(true);
-      return;
-    }
+        if (isNaN(comicId)) {
+            setError(true);
+            return;
+        }
 
-    // Mock API call replaced with a real API call if needed
-    getPublishedChapter(chapterId).then(response => {
-      if (response.status === 200) {
-        setChapter(response.data);
-      } else {
-        setError(true);
-      }
-    });
-  }, []);
+        getComic(comicId).then(response => {
+            if (response.status === 200) {
+                setComic(response.data);
+            } else {
+                setError(true);
+            }
+        });
+    }, []);
 
-  const getPublishedChapter = async (id) => {
-    // Mock API response
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ status: 200, data: { title: 'Sample Chapter Title', content: '<p>Sample chapter content...</p>' } });
-      }, 1000);
-    });
-  };
+    const handleNextChapter = () => {
+        window.location.href = 'next_chapter.html'; // Update with actual next chapter URL
+    };
 
-  if (error) {
     return (
-      <div className="chapter-section">
-        <h2 id="chapterTitle">No Chapter Found</h2>
-        <div id="chapterBody">Please publish a chapter first.</div>
-      </div>
+        <div>
+            <section className="container">
+                <div className="chapter-content">
+                    <h1 className="chapter-title">Published Chapter</h1>
+                    <h2 className="chapter-title">
+                        {error ? 'No Comic Found' : (comic ? comic.title : 'Loading...')}
+                    </h2>
+                    {comic && comic.imageSrc && (
+                        <img className="comic-image" src={comic.imageSrc} alt="Comic Page" />
+                    )}
+                    <div className="chapter-body"></div>
+                    <button onClick={handleNextChapter}>
+                        Next Chapter
+                    </button>
+                </div>
+            </section>
+        </div>
     );
-  }
-
-  return (
-    <main>
-      <section className="container chapter-section">
-        <h2 id="chapterTitle">{chapter.title}</h2>
-        <div id="chapterBody" dangerouslySetInnerHTML={{ __html: chapter.content }}></div>
-        <button id="nextChapter">Next Chapter</button>
-      </section>
-    </main>
-  );
 };
 
 export default PublishedChapter;
