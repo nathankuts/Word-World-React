@@ -9,6 +9,7 @@ import Teasers from './components/Teasers';
 import Footer from './components/Footer';
 import PublishedChapter from './components/PublishedChapter/PublishedChapter';
 import PublishForm from './components/PublishForm';
+import Comics from './components/Comics'; // Import the Comics component
 
 function App() {
     return (
@@ -32,6 +33,9 @@ function App() {
                     </Route>
                     <Route path="/publish">
                         <PublishForm />
+                    </Route>
+                    <Route path="/comics">
+                        <Comics /> {/* Add the Comics route */}
                     </Route>
                 </Switch>
                 <Footer />
