@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import NoticeBoard from './components/NoticeBoard';
 import SignupForm from './components/SignupForm';
+import SignInForm from './components/SignInForm';
 import Teasers from './components/Teasers';
 import Footer from './components/Footer';
 
@@ -17,6 +18,7 @@ function App() {
                 </div>
             </section>
             <SignupForm />
+            <SignInForm />
             <Teasers />
             <Footer />
         </div>
