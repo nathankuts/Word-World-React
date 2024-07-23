@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './comics.css';
-import { postComic } from '../mockApi';
+import { postComic } from '../mockApi 1';
 
 function Comics() {
   const [title, setTitle] = useState('');
