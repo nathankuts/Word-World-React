@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './comics.css';
+import { postComic } from '../mockApi';
 
 function Comics() {
   const [title, setTitle] = useState('');
@@ -14,14 +15,11 @@ function Comics() {
       reader.onload = async (event) => {
         const comicImageSrc = event.target.result;
 
-        // Use the mock API to save the comic
         try {
           const response = await postComic(title, comicImageSrc);
           if (response.status === 200) {
-            // Redirect to the chapter page with the comic ID
-            window.location.href = `chapter.html?id=${response.comic.id}`;
+            window.location.href = `/chapter?id=${response.comic.id}`;
           } else {
-            // Handle error
             alert('Failed to save comic');
           }
         } catch (error) {
@@ -36,7 +34,7 @@ function Comics() {
     <div>
       <header>
         <div className="container">
-          <a href="index.html">
+          <a href="/">
             <h1 className="logo">Word World</h1>
             <h5>Home for original stories</h5>
           </a>
@@ -87,15 +85,5 @@ function Comics() {
     </div>
   );
 }
-
-// Mock API function (Replace this with your actual API call)
-const postComic = async (title, comicImageSrc) => {
-  // Simulate an API call
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ status: 200, comic: { id: '12345' } });
-    }, 1000);
-  });
-};
 
 export default Comics;
